@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retirement Calculator – Estimate Your Future Savings</title>
+  <meta name="description" content="Plan your retirement savings and estimate how much you will have in the future with this free retirement calculator.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Retirement Calculator</h1>
+
+<div class="card">
+  <input id="current" placeholder="Current Savings">
+  <input id="monthly" placeholder="Monthly Contribution">
+  <input id="years" placeholder="Years to Retirement">
+  <input id="rate" placeholder="Annual Return %">
+  <button onclick="calcRetire()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcRetire() {
+  let p = parseFloat(document.getElementById("current").value);
+  let m = parseFloat(document.getElementById("monthly").value);
+  let y = parseFloat(document.getElementById("years").value);
+  let r = parseFloat(document.getElementById("rate").value) / 100;
+
+  let total = p;
+  for (let i = 0; i < y * 12; i++) {
+    total += m;
+    total *= (1 + r / 12);
+  }
+
+  document.getElementById("result").innerText =
+    "Estimated Retirement Savings: $" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
