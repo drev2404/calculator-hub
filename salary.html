@@ -8,13 +8,17 @@
 <body>
 
 <h1>Salary Calculator</h1>
-
 <div class="card">
-  <input id="hourly" placeholder="Hourly Rate">
+
+  <input id="hourly" placeholder="Hourly Wage ($)">
   <input id="hours" placeholder="Hours per Week">
-  <button onclick="calcSalary()">Calculate</button>
-  <p id="result"></p>
+
+  <button onclick="salaryCalc()">Calculate</button>
+
+  <p id="salaryResult"></p>
+
 </div>
+
 <div class="card">
   <h2>How the Salary Calculator Works</h2>
   <p>
@@ -45,15 +49,29 @@
 
 <script>
 function salaryCalc() {
-  let hourly = parseFloat(document.getElementById("hourly").value);
-  let yearly = hourly * 40 * 52;
 
-  document.getElementById("result").innerText =
+  let hourly = parseFloat(document.getElementById("hourly").value);
+  let hours = parseFloat(document.getElementById("hours").value);
+
+  // safety checks
+  hourly = hourly || 0;
+  hours = hours || 0;
+
+  if (hourly === 0 || hours === 0) {
+    document.getElementById("salaryResult").innerText =
+      "Enter hourly wage and hours";
+    return;
+  }
+
+  let yearly = hourly * hours * 52;
+  let monthly = yearly / 12;
+  let weekly = hourly * hours;
+
+  document.getElementById("salaryResult").innerHTML =
     "Yearly: $" + yearly.toFixed(2) +
-    " | Monthly: $" + (yearly/12).toFixed(2) +
-    " | Weekly: $" + (yearly/52).toFixed(2);
+    "<br>Monthly: $" + monthly.toFixed(2) +
+    "<br>Weekly: $" + weekly.toFixed(2);
 }
 </script>
-
 </body>
 </html>
