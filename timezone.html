@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Zone Calculator</title>
+  <meta name="description" content="Compare time zones instantly.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Time Zone Calculator</h1>
+
+<div class="card">
+  <input id="hours" placeholder="Hours (24h format)">
+  <input id="offset" placeholder="Time Zone Difference (+/- hours)">
+  <button onclick="calcTime()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How This Works</h2>
+  <p>Add or subtract hours to convert between time zones.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>3PM EST + 3 hours = 6PM GMT</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>What is UTC offset?</b> Difference from Coordinated Universal Time.</p>
+  <p><b>Is this accurate?</b> Yes for basic conversions (not DST automatic).</p>
+</div>
+
+<div class="card">
+  <a href="index.html">← Back Home</a>
+</div>
+
+<script>
+function calcTime() {
+  let h = parseFloat(document.getElementById("hours").value);
+  let o = parseFloat(document.getElementById("offset").value);
+
+  let result = h + o;
+
+  document.getElementById("result").innerText =
+    "Converted Time: " + result + ":00";
+}
+</script>
+
+</body>
+</html>
