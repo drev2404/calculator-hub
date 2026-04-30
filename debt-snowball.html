@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debt Snowball Calculator</title>
+  <meta name="description" content="Calculate debt payoff using the snowball method.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Debt Snowball Calculator</h1>
+
+<div class="card">
+  <input id="debt" placeholder="Total Debt ($)">
+  <input id="payment" placeholder="Monthly Payment ($)">
+  <button onclick="calcDebt()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How This Works</h2>
+  <p>The debt snowball method pays off smallest debts first to build momentum.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>$5,000 debt with $300/month payment may take ~17 months to eliminate.</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Why use snowball method?</b> It builds motivation quickly.</p>
+  <p><b>Is it better than avalanche?</b> Snowball is psychological, avalanche saves more interest.</p>
+</div>
+
+<div class="card">
+  <a href="index.html">← Back Home</a> |
+  <a href="loan-payoff.html">Loan Payoff Calculator</a>
+</div>
+
+<script>
+function calcDebt() {
+  let debt = parseFloat(document.getElementById("debt").value);
+  let payment = parseFloat(document.getElementById("payment").value);
+
+  let months = debt / payment;
+
+  document.getElementById("result").innerText =
+    "Estimated Payoff Time: " + months.toFixed(1) + " months";
+}
+</script>
+
+</body>
+</html>
