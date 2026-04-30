@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Salary Calculator – Convert Hourly to Salary Easily</title>
+  <meta name="description" content="Convert hourly wages to salary instantly.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Salary Calculator</h1>
+
+<div class="card">
+  <input id="hourly" placeholder="Hourly Rate">
+  <input id="hours" placeholder="Hours per Week">
+  <button onclick="calcSalary()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcSalary() {
+  let rate = parseFloat(document.getElementById("hourly").value);
+  let hours = parseFloat(document.getElementById("hours").value);
+
+  let yearly = rate * hours * 52;
+
+  document.getElementById("result").innerText =
+    "Annual Salary: $" + yearly.toFixed(2);
+}
+</script>
+
+</body>
+</html>
