@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Savings Goal Calculator</title>
+  <meta name="description" content="Calculate how long it will take to reach your savings goal.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Savings Goal Calculator</h1>
+
+<div class="card">
+  <input id="goal" placeholder="Savings Goal">
+  <input id="monthly" placeholder="Monthly Savings">
+  <button onclick="calcSave()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcSave() {
+  let g = parseFloat(document.getElementById("goal").value);
+  let m = parseFloat(document.getElementById("monthly").value);
+
+  let months = g / m;
+  let years = (months / 12).toFixed(1);
+
+  document.getElementById("result").innerText =
+    "Time Needed: " + months.toFixed(0) + " months (" + years + " years)";
+}
+</script>
+
+</body>
+</html>
