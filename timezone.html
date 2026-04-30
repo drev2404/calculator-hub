@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Time Zone Converter</title>
-  <meta name="description" content="Convert time between different time zones worldwide instantly.">
+  <meta name="description" content="Convert time between global time zones with automatic daylight savings and location detection.">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,26 +12,23 @@
 
 <div class="card">
 
+  <label>Enter Time:</label>
   <input type="time" id="time">
 
-  <label>From:</label>
-  <select id="fromZone">
-    <option value="-5">EST (New York)</option>
-    <option value="0">UTC (London)</option>
-    <option value="1">CET (Paris)</option>
-    <option value="5.5">IST (India)</option>
-    <option value="9">JST (Tokyo)</option>
-    <option value="10">AEST (Sydney)</option>
-  </select>
+  <p><b>Your Time Zone (Auto Detected):</b></p>
+  <p id="userZone"></p>
 
-  <label>To:</label>
+  <label>Convert To:</label>
   <select id="toZone">
-    <option value="-5">EST (New York)</option>
-    <option value="0">UTC (London)</option>
-    <option value="1">CET (Paris)</option>
-    <option value="5.5">IST (India)</option>
-    <option value="9">JST (Tokyo)</option>
-    <option value="10">AEST (Sydney)</option>
+    <option value="America/New_York">New York (EST/EDT)</option>
+    <option value="America/Chicago">Chicago (CST/CDT)</option>
+    <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+    <option value="Europe/London">London (GMT/BST)</option>
+    <option value="Europe/Paris">Paris (CET/CEST)</option>
+    <option value="Asia/Dubai">Dubai</option>
+    <option value="Asia/Kolkata">India (IST)</option>
+    <option value="Asia/Tokyo">Tokyo (JST)</option>
+    <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
   </select>
 
   <button onclick="convertTime()">Convert</button>
@@ -40,67 +37,71 @@
 
 </div>
 
-<!-- ✅ EXPLANATION -->
+<!-- EXPLANATION -->
 <div class="card">
   <h2>How This Time Zone Converter Works</h2>
   <p>
-    This calculator converts time between different global time zones by applying the hour difference.
-    Simply enter a time, choose your current time zone, and select a destination time zone.
+    This tool automatically detects your current time zone and converts the time you enter
+    into another location. It uses real-world time zone data, including daylight savings adjustments.
   </p>
 </div>
 
-<!-- ✅ EXAMPLE -->
+<!-- EXAMPLE -->
 <div class="card">
   <h2>Example</h2>
   <p>
-    If it is 3:00 PM in New York (EST), converting to London (UTC)
-    will show 8:00 PM.
+    If it is 3:00 PM in your location, converting to London will automatically adjust
+    for daylight savings and show the correct local time there.
   </p>
 </div>
 
-<!-- ✅ FAQ -->
+<!-- FAQ -->
 <div class="card">
   <h2>Frequently Asked Questions</h2>
 
-  <p><b>Does this include daylight savings time?</b><br>
-  No, this version uses fixed time offsets.</p>
+  <p><b>Does this handle daylight savings time?</b><br>
+  Yes, it automatically adjusts based on the selected location and current date.</p>
 
-  <p><b>Can I convert any time zone?</b><br>
-  Yes, select from the available options.</p>
+  <p><b>How does it detect my location?</b><br>
+  It uses your browser’s time zone settings, not GPS.</p>
 
-  <p><b>Is this real-time?</b><br>
-  No, it converts based on the time you enter.</p>
+  <p><b>Is this accurate worldwide?</b><br>
+  Yes, it uses built-in global time zone data.</p>
 
 </div>
 
 <a href="index.html">← Back Home</a>
 
 <script>
+const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+document.getElementById("userZone").innerText = userTimeZone;
+
 function convertTime() {
   let time = document.getElementById("time").value;
-  let from = parseFloat(document.getElementById("fromZone").value);
-  let to = parseFloat(document.getElementById("toZone").value);
+  let toZone = document.getElementById("toZone").value;
 
   if (!time) {
-    document.getElementById("result").innerText = "Enter a time";
+    document.getElementById("result").innerText = "Please enter a time";
     return;
   }
 
-  let [hours, minutes] = time.split(":").map(Number);
+  let [hours, minutes] = time.split(":");
 
-  let utc = hours - from;
-  let converted = utc + to;
+  let now = new Date();
+  now.setHours(hours);
+  now.setMinutes(minutes);
 
-  if (converted < 0) converted += 24;
-  if (converted >= 24) converted -= 24;
+  let options = {
+    timeZone: toZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  };
 
-  let finalHours = Math.floor(converted);
-  let finalMinutes = minutes;
+  let converted = new Intl.DateTimeFormat([], options).format(now);
 
   document.getElementById("result").innerText =
-    "Converted Time: " +
-    String(finalHours).padStart(2, '0') + ":" +
-    String(finalMinutes).padStart(2, '0');
+    "Converted Time: " + converted;
 }
 </script>
 
