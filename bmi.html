@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BMI Calculator – Calculate Your Body Mass Index Instantly</title>
-<meta name="description" content="Free BMI calculator to quickly calculate your body mass index and understand your health status.">
+  <title>BMI Calculator (US Units)</title>
+  <meta name="description" content="Calculate BMI using pounds and inches.">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1>BMI Calculator</h1>
 
 <div class="card">
-  <input id="weight" placeholder="Weight (kg)">
-  <input id="height" placeholder="Height (m)">
-  <button onclick="calcBMI()">Calculate</button>
-  <p id="result"></p>
+
+  <input id="weight" placeholder="Weight (lbs)">
+  <input id="feet" placeholder="Height (feet)">
+  <input id="inches" placeholder="Height (inches)">
+
+  <button onclick="bmiCalc()">Calculate</button>
+
+  <p id="bmiResult"></p>
+
 </div>
+
 <div class="card">
-  <h2>What Is BMI?</h2>
-  <p>
-    Body Mass Index (BMI) is a simple calculation using your weight and height.
-    It helps determine whether you are underweight, normal weight, overweight, or obese.
-  </p>
+  <h2>How It Works</h2>
+  <p>This BMI calculator uses US units (pounds and feet/inches).</p>
 </div>
-  <div class="card">
+
+<div class="card">
   <h2>Example</h2>
-  <p>
-    A person who is 5'10" (178 cm) and weighs 180 lbs (82 kg) will have a BMI around 25.8,
-    which falls into the “overweight” category.
-  </p>
-  </div>
-  <div class="card">
-  <h2>Frequently Asked Questions</h2>
-
-  <p><b>Is BMI accurate?</b><br>
-  It is a general estimate and does not account for muscle mass.</p>
-
-  <p><b>What is a healthy BMI?</b><br>
-  Typically between 18.5 and 24.9.</p>
-  </div>
-<a href="index.html">← Back</a>
+  <p>180 lbs, 5'10" → Normal BMI range ~25.8</p>
+</div>
 
 <script>
 function bmiCalc() {
   let w = parseFloat(document.getElementById("weight").value);
-  let h = parseFloat(document.getElementById("height").value);
+  let ft = parseFloat(document.getElementById("feet").value);
+  let inch = parseFloat(document.getElementById("inches").value);
 
-  let bmi = w / (h * h);
+  if (!w || !ft) {
+    document.getElementById("bmiResult").innerText = "Enter all values";
+    return;
+  }
+
+  let heightInches = (ft * 12) + (inch || 0);
+
+  let bmi = (w / (heightInches * heightInches)) * 703;
+
   let category = "";
-
   if (bmi < 18.5) category = "Underweight";
   else if (bmi < 25) category = "Normal";
   else if (bmi < 30) category = "Overweight";
