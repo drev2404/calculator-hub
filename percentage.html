@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Percentage Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Percentage Calculator</h1>
+
+<div class="card">
+  <input id="value" placeholder="Value">
+  <input id="percent" placeholder="Percent">
+  <button onclick="calcPercent()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function calcPercent() {
+  let v = parseFloat(document.getElementById("value").value);
+  let p = parseFloat(document.getElementById("percent").value);
+
+  let result = (v * p) / 100;
+
+  document.getElementById("result").innerText =
+    "Result: " + result;
+}
+</script>
+
+</body>
+</html>
