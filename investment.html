@@ -15,6 +15,7 @@
   <input id="years" placeholder="Years">
   <button onclick="calcInvest()">Calculate</button>
   <p id="result"></p>
+  <div id="growth"></div>
 </div>
 <div class="card">
   <h2>Investment Growth Explained</h2>
@@ -39,19 +40,25 @@
   No, market returns vary.</p>
   </div>
 <a href="index.html">← Back Home</a>
-
 <script>
-function calcInvest() {
-  let p = parseFloat(document.getElementById("principal").value);
-  let r = parseFloat(document.getElementById("rate").value)/100;
-  let t = parseFloat(document.getElementById("years").value);
+function investCalc() {
+  let principal = parseFloat(document.getElementById("amount").value);
+  let rate = parseFloat(document.getElementById("rate").value) / 100;
+  let years = parseFloat(document.getElementById("years").value);
 
-  let total = p * Math.pow((1+r), t);
+  let table = "<table><tr><th>Year</th><th>Value</th></tr>";
 
-  document.getElementById("result").innerText =
-    "Total: $" + total.toFixed(2);
+  for (let i = 1; i <= years; i++) {
+    principal *= (1 + rate);
+    table += "<tr><td>" + i + "</td><td>$" + principal.toFixed(2) + "</td></tr>";
+  }
+
+  table += "</table>";
+
+  document.getElementById("growth").innerHTML = table;
 }
 </script>
+
 
 </body>
 </html>
