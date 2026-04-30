@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Investment Calculator – Estimate Growth</title>
+  <meta name="description" content="Estimate investment growth easily.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Investment Calculator</h1>
+
+<div class="card">
+  <input id="principal" placeholder="Initial Amount">
+  <input id="rate" placeholder="Interest %">
+  <input id="years" placeholder="Years">
+  <button onclick="calcInvest()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcInvest() {
+  let p = parseFloat(document.getElementById("principal").value);
+  let r = parseFloat(document.getElementById("rate").value)/100;
+  let t = parseFloat(document.getElementById("years").value);
+
+  let total = p * Math.pow((1+r), t);
+
+  document.getElementById("result").innerText =
+    "Total: $" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
