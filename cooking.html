@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cooking Conversion Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Cooking Conversion Calculator</h1>
+
+<div class="card">
+
+  <input id="value" placeholder="Enter amount">
+
+  <select id="type">
+    <option value="cups-ml">Cups → mL</option>
+    <option value="tbsp-tsp">Tablespoons → Teaspoons</option>
+    <option value="oz-grams">Ounces → Grams</option>
+    <option value="f-c">Fahrenheit → Celsius</option>
+    <option value="scale">Recipe Scaling (x2, x3, x4)</option>
+  </select>
+
+  <input id="scaleFactor" placeholder="Scale factor (only for scaling)">
+
+  <button onclick="convert()">Convert</button>
+
+  <p id="result"></p>
+
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function convert() {
+  let v = parseFloat(document.getElementById("value").value);
+  let type = document.getElementById("type").value;
+  let scale = parseFloat(document.getElementById("scaleFactor").value);
+
+  let result = 0;
+
+  if (type === "cups-ml") {
+    result = v * 240;
+    document.getElementById("result").innerText = v + " cups = " + result + " mL";
+  }
+
+  if (type === "tbsp-tsp") {
+    result = v * 3;
+    document.getElementById("result").innerText = v + " tbsp = " + result + " tsp";
+  }
+
+  if (type === "oz-grams") {
+    result = v * 28.35;
+    document.getElementById("result").innerText = v + " oz = " + result.toFixed(1) + " g";
+  }
+
+  if (type === "f-c") {
+    result = (v - 32) * 5/9;
+    document.getElementById("result").innerText = v + "°F = " + result.toFixed(1) + "°C";
+  }
+
+  if (type === "scale") {
+    result = v * scale;
+    document.getElementById("result").innerText = "Scaled amount: " + result;
+  }
+}
+</script>
+
+</body>
+</html>
