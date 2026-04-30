@@ -44,14 +44,14 @@
 <a href="index.html">← Back Home</a>
 
 <script>
-function calcSalary() {
-  let rate = parseFloat(document.getElementById("hourly").value);
-  let hours = parseFloat(document.getElementById("hours").value);
-
-  let yearly = rate * hours * 52;
+function salaryCalc() {
+  let hourly = parseFloat(document.getElementById("hourly").value);
+  let yearly = hourly * 40 * 52;
 
   document.getElementById("result").innerText =
-    "Annual Salary: $" + yearly.toFixed(2);
+    "Yearly: $" + yearly.toFixed(2) +
+    " | Monthly: $" + (yearly/12).toFixed(2) +
+    " | Weekly: $" + (yearly/52).toFixed(2);
 }
 </script>
 
