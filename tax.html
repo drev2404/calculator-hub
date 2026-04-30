@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tax Calculator – Estimate Your Taxes Quickly</title>
+  <meta name="description" content="Estimate your taxes quickly with this free tax calculator. Get a rough idea of your tax obligations instantly.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Tax Calculator</h1>
+
+<div class="card">
+
+  <input id="income" placeholder="Annual Income ($)">
+  
+  <select id="taxRate">
+    <option value="0.10">10%</option>
+    <option value="0.12">12%</option>
+    <option value="0.22">22%</option>
+    <option value="0.24">24%</option>
+    <option value="0.32">32%</option>
+    <option value="0.35">35%</option>
+    <option value="0.37">37%</option>
+  </select>
+
+  <button onclick="calcTax()">Calculate</button>
+
+  <p id="result"></p>
+
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcTax() {
+  let income = parseFloat(document.getElementById("income").value);
+  let rate = parseFloat(document.getElementById("taxRate").value);
+
+  let tax = income * rate;
+  let net = income - tax;
+
+  document.getElementById("result").innerText =
+    "Estimated Tax: $" + tax.toFixed(2) +
+    " | After Tax Income: $" + net.toFixed(2);
+}
+</script>
+
+</body>
+</html>
