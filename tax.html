@@ -54,16 +54,16 @@
 <a href="index.html">← Back Home</a>
 
 <script>
-function calcTax() {
+function taxCalc() {
   let income = parseFloat(document.getElementById("income").value);
-  let rate = parseFloat(document.getElementById("taxRate").value);
+  let tax = 0;
 
-  let tax = income * rate;
-  let net = income - tax;
+  if (income <= 11000) tax = income * 0.10;
+  else if (income <= 44725) tax = 11000*0.10 + (income-11000)*0.12;
+  else tax = 11000*0.10 + (44725-11000)*0.12 + (income-44725)*0.22;
 
   document.getElementById("result").innerText =
-    "Estimated Tax: $" + tax.toFixed(2) +
-    " | After Tax Income: $" + net.toFixed(2);
+    "Estimated Tax: $" + tax.toFixed(2);
 }
 </script>
 
