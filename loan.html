@@ -15,6 +15,7 @@
   <input id="years" placeholder="Years">
   <button onclick="calcLoan()">Calculate</button>
   <p id="result"></p>
+  <div id="schedule"></div>
   <div class="card">
   <h2>How to Use This Loan Calculator</h2>
   <p>
@@ -47,16 +48,30 @@
 <a href="index.html">← Back</a>
 
 <script>
-function calcLoan() {
-  let p = parseFloat(document.getElementById("loan").value);
-  let r = parseFloat(document.getElementById("rate").value) / 100 / 12;
+function loanCalc() {
+  let P = parseFloat(document.getElementById("loan").value);
+  let r = parseFloat(document.getElementById("interest").value) / 100 / 12;
   let n = parseFloat(document.getElementById("years").value) * 12;
 
-  let x = Math.pow(1 + r, n);
-  let payment = (p * x * r) / (x - 1);
+  let monthly = (P * r) / (1 - Math.pow(1 + r, -n));
 
-  document.getElementById("result").innerText =
-    "Monthly: $" + payment.toFixed(2);
+  document.getElementById("loanResult").innerText =
+    "Monthly Payment: $" + monthly.toFixed(2);
+
+  let balance = P;
+  let table = "<table><tr><th>Month</th><th>Payment</th><th>Interest</th><th>Balance</th></tr>";
+
+  for (let i = 1; i <= n; i++) {
+    let interest = balance * r;
+    let principal = monthly - interest;
+    balance -= principal;
+
+    table += "<tr><td>" + i + "</td><td>$" + monthly.toFixed(2) + "</td><td>$" + interest.toFixed(2) + "</td><td>$" + Math.max(balance,0).toFixed(2) + "</td></tr>";
+  }
+
+  table += "</table>";
+
+  document.getElementById("schedule").innerHTML = table;
 }
 </script>
 
