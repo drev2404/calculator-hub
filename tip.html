@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tip Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Tip Calculator</h1>
+
+<div class="card">
+  <input id="bill" placeholder="Bill Amount">
+  <input id="tip" placeholder="Tip %">
+  <button onclick="calcTip()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function calcTip() {
+  let bill = parseFloat(document.getElementById("bill").value);
+  let tip = parseFloat(document.getElementById("tip").value);
+
+  let total = bill * (tip / 100);
+
+  document.getElementById("result").innerText =
+    "Tip: $" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
