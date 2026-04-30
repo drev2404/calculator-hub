@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Investment Calculator – Estimate Investment Growth</title>
-<meta name="description" content="Estimate your investment growth over time with this free investment calculator. Plan your financial future today.">
+  <title>Investment Calculator</title>
+  <meta name="description" content="Calculate investment growth with compound interest.">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1>Investment Calculator</h1>
 
 <div class="card">
-  <input id="principal" placeholder="Initial Amount">
-  <input id="rate" placeholder="Interest %">
+  <input id="amount" placeholder="Initial Amount">
+  <input id="rate" placeholder="Annual Return %">
   <input id="years" placeholder="Years">
-  <button onclick="calcInvest()">Calculate</button>
-  <p id="result"></p>
+
+  <button onclick="investCalc()">Calculate</button>
+
+  <p id="investResult"></p>
   <div id="growth"></div>
 </div>
+
 <div class="card">
-  <h2>Investment Growth Explained</h2>
-  <p>
-    This calculator estimates how your investment grows over time using compound interest.
-    It’s useful for planning savings and long-term financial goals.
-  </p>
+  <h2>How It Works</h2>
+  <p>This calculator shows compound growth over time.</p>
 </div>
-  <div class="card">
+
+<div class="card">
   <h2>Example</h2>
-  <p>
-    Investing $200 monthly at a 7% return can grow to over $100,000 in 20 years.
-  </p>
-  </div>
-  <div class="card">
-  <h2>Frequently Asked Questions</h2>
+  <p>$1,000 at 7% for 10 years ≈ $1,967.</p>
+</div>
 
-  <p><b>Does this include compounding?</b><br>
-  Yes, long-term growth assumes compounding returns.</p>
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Does this compound yearly?</b> Yes.</p>
+  <p><b>Can I use it for stocks?</b> Yes, as an estimate.</p>
+</div>
 
-  <p><b>Is it guaranteed?</b><br>
-  No, market returns vary.</p>
-  </div>
 <a href="index.html">← Back Home</a>
+
 <script>
 function investCalc() {
   let principal = parseFloat(document.getElementById("amount").value);
   let rate = parseFloat(document.getElementById("rate").value) / 100;
   let years = parseFloat(document.getElementById("years").value);
 
+  if (!principal || !rate || !years) {
+    document.getElementById("investResult").innerText = "Enter all values";
+    return;
+  }
+
+  let value = principal;
   let table = "<table><tr><th>Year</th><th>Value</th></tr>";
 
   for (let i = 1; i <= years; i++) {
-    principal *= (1 + rate);
-    table += "<tr><td>" + i + "</td><td>$" + principal.toFixed(2) + "</td></tr>";
+    value *= (1 + rate);
+    table += `<tr><td>${i}</td><td>$${value.toFixed(2)}</td></tr>`;
   }
 
   table += "</table>";
 
+  document.getElementById("investResult").innerText =
+    "Final Value: $" + value.toFixed(2);
+
   document.getElementById("growth").innerHTML = table;
 }
 </script>
-
 
 </body>
 </html>
