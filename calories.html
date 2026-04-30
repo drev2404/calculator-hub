@@ -42,15 +42,14 @@
 <a href="index.html">← Back Home</a>
 
 <script>
-function calcCalories() {
-  let w = parseFloat(document.getElementById("weight").value);
-  let h = parseFloat(document.getElementById("height").value);
-  let a = parseFloat(document.getElementById("age").value);
-
-  let calories = 10*w + 6.25*h - 5*a + 5;
+function calorieCalc() {
+  let weight = parseFloat(document.getElementById("weight").value);
+  let calories = weight * 15;
 
   document.getElementById("result").innerText =
-    "Daily Calories: " + calories.toFixed(0);
+    "Maintenance: " + calories +
+    " | Weight Loss: " + (calories - 500) +
+    " | Weight Gain: " + (calories + 500);
 }
 </script>
 
