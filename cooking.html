@@ -11,21 +11,27 @@
 
 <div class="card">
 
-  <input id="value" placeholder="Enter amount">
+  <input id="amount" placeholder="Enter amount">
 
-  <select id="type">
-    <option value="cups-ml">Cups → mL</option>
-    <option value="tbsp-tsp">Tablespoons → Teaspoons</option>
-    <option value="oz-grams">Ounces → Grams</option>
-    <option value="f-c">Fahrenheit → Celsius</option>
-    <option value="scale">Recipe Scaling (x2, x3, x4)</option>
+  <select id="fromUnit">
+    <option value="cup">Cups</option>
+    <option value="tbsp">Tablespoons</option>
+    <option value="tsp">Teaspoons</option>
+    <option value="ml">Milliliters</option>
   </select>
 
-  <input id="scaleFactor" placeholder="Scale factor (only for scaling)">
+  <select id="toUnit">
+    <option value="cup">Cups</option>
+    <option value="tbsp">Tablespoons</option>
+    <option value="tsp">Teaspoons</option>
+    <option value="ml">Milliliters</option>
+  </select>
 
-  <button onclick="convert()">Convert</button>
+  <button onclick="convertCooking()">Convert</button>
 
   <p id="result"></p>
+
+</div>
 
 </div>
 <div class="card">
@@ -54,37 +60,33 @@
 <a href="index.html">← Back Home</a>
 
 <script>
-function convert() {
-  let v = parseFloat(document.getElementById("value").value);
-  let type = document.getElementById("type").value;
-  let scale = parseFloat(document.getElementById("scaleFactor").value);
+function convertCooking() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  let from = document.getElementById("fromUnit").value;
+  let to = document.getElementById("toUnit").value;
 
-  let result = 0;
-
-  if (type === "cups-ml") {
-    result = v * 240;
-    document.getElementById("result").innerText = v + " cups = " + result + " mL";
+  if (!amount) {
+    document.getElementById("result").innerText = "Enter an amount";
+    return;
   }
 
-  if (type === "tbsp-tsp") {
-    result = v * 3;
-    document.getElementById("result").innerText = v + " tbsp = " + result + " tsp";
-  }
+  // Convert everything to ml first
+  let ml;
 
-  if (type === "oz-grams") {
-    result = v * 28.35;
-    document.getElementById("result").innerText = v + " oz = " + result.toFixed(1) + " g";
-  }
+  if (from === "cup") ml = amount * 240;
+  else if (from === "tbsp") ml = amount * 15;
+  else if (from === "tsp") ml = amount * 5;
+  else if (from === "ml") ml = amount;
 
-  if (type === "f-c") {
-    result = (v - 32) * 5/9;
-    document.getElementById("result").innerText = v + "°F = " + result.toFixed(1) + "°C";
-  }
+  let result;
 
-  if (type === "scale") {
-    result = v * scale;
-    document.getElementById("result").innerText = "Scaled amount: " + result;
-  }
+  if (to === "cup") result = ml / 240;
+  else if (to === "tbsp") result = ml / 15;
+  else if (to === "tsp") result = ml / 5;
+  else if (to === "ml") result = ml;
+
+  document.getElementById("result").innerText =
+    "Converted: " + result.toFixed(2) + " " + to;
 }
 </script>
 
