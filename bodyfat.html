@@ -1,72 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Body Fat Calculator</title>
-  <meta name="description" content="Estimate your body fat percentage easily.">
+  <title>Body Fat Calculator (US Units)</title>
+  <meta name="description" content="Estimate body fat using US units.">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1>Body Fat Calculator</h1>
 
 <div class="card">
-  <input id="weight" placeholder="Weight (kg)">
-  <input id="height" placeholder="Height (cm)">
+
+  <input id="weight" placeholder="Weight (lbs)">
+  <input id="feet" placeholder="Height (feet)">
+  <input id="inches" placeholder="Height (inches)">
   <input id="age" placeholder="Age">
+
   <select id="gender">
     <option value="male">Male</option>
     <option value="female">Female</option>
   </select>
 
   <button onclick="calcFat()">Calculate</button>
+
   <p id="result"></p>
-  <div class="card">
-  <h2>How This Body Fat Calculator Works</h2>
-  <p>
-    This calculator estimates your body fat percentage using height, weight, age, and gender.
-    It gives you a general idea of your fitness level and body composition.
-  </p>
-  </div>
-  <div class="card">
-  <h2>Example</h2>
-  <p>
-    A 180 lb male who is 5'10" and 30 years old
-    will typically fall between 15–20% body fat depending on activity level and muscle mass.
-  </p>
-  </div>
-  <div class="card">
-  <h2>Frequently Asked Questions</h2>
 
-  <p><b>Is this medically exact?</b><br>
-  No, it is an estimate based on formulas.</p>
-
-  <p><b>Does muscle affect results?</b><br>
-  Yes, muscular people may show higher readings.</p>
-
-  <p><b>Is it useful for fitness tracking?</b><br>
-  Yes, for general progress tracking.</p>
-  </div>
 </div>
 
-<a href="index.html">← Back Home</a>
+<div class="card">
+  <h2>How It Works</h2>
+  <p>Uses BMI-based estimation with US units (lbs + feet/inches).</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>200 lbs, 5'11", age 30 → ~18–22% body fat range</p>
+</div>
 
 <script>
 function calcFat() {
   let w = parseFloat(document.getElementById("weight").value);
-  let h = parseFloat(document.getElementById("height").value);
-  let a = parseFloat(document.getElementById("age").value);
-  let g = document.getElementById("gender").value;
+  let ft = parseFloat(document.getElementById("feet").value);
+  let inch = parseFloat(document.getElementById("inches").value);
+  let age = parseFloat(document.getElementById("age").value);
+  let gender = document.getElementById("gender").value;
+
+  if (!w || !ft || !age) {
+    document.getElementById("result").innerText = "Enter all values";
+    return;
+  }
+
+  let heightInches = (ft * 12) + (inch || 0);
+
+  let bmi = (w / (heightInches * heightInches)) * 703;
 
   let fat;
 
-  if (g === "male") {
-    fat = (1.20 * (w / ((h/100)*(h/100))) + 0.23 * a - 16.2);
+  if (gender === "male") {
+    fat = (1.20 * bmi) + (0.23 * age) - 16.2;
   } else {
-    fat = (1.20 * (w / ((h/100)*(h/100))) + 0.23 * a - 5.4);
+    fat = (1.20 * bmi) + (0.23 * age) - 5.4;
   }
 
   document.getElementById("result").innerText =
-    "Body Fat %: " + fat.toFixed(1) + "%";
+    "Body Fat: " + fat.toFixed(1) + "%";
 }
 </script>
 
