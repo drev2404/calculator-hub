@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GPA Calculator</title>
+  <meta name="description" content="Calculate GPA easily.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>GPA Calculator</h1>
+
+<div class="card">
+  <input id="g1" placeholder="Grade 1">
+  <input id="g2" placeholder="Grade 2">
+  <input id="g3" placeholder="Grade 3">
+  <button onclick="calcGPA()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcGPA() {
+  let g1 = parseFloat(document.getElementById("g1").value);
+  let g2 = parseFloat(document.getElementById("g2").value);
+  let g3 = parseFloat(document.getElementById("g3").value);
+
+  let avg = (g1 + g2 + g3) / 3;
+
+  document.getElementById("result").innerText =
+    "GPA: " + avg.toFixed(2);
+}
+</script>
+
+</body>
+</html>
