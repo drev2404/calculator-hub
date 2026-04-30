@@ -9,13 +9,7 @@
 
 <h1>GPA Calculator</h1>
 
-<div class="card">
-  <input id="g1" placeholder="Grade 1">
-  <input id="g2" placeholder="Grade 2">
-  <input id="g3" placeholder="Grade 3">
-  <button onclick="calcGPA()">Calculate</button>
-  <p id="result"></p>
-</div>
+< 
 <div class="card">
   <h2>How GPA Is Calculated</h2>
   <p>
@@ -24,6 +18,21 @@
   </p>
 </div>
   <div class="card">
+
+  <input id="grade1" placeholder="Grade 1 (A=4, B=3, etc)">
+  <input id="credit1" placeholder="Credits">
+
+  <input id="grade2" placeholder="Grade 2">
+  <input id="credit2" placeholder="Credits">
+
+  <input id="grade3" placeholder="Grade 3">
+  <input id="credit3" placeholder="Credits">
+
+  <button onclick="calcGPA()">Calculate GPA</button>
+
+  <p id="gpaResult"></p>
+
+</div>
   <h2>Example</h2>
   <p>
     A student with mostly A’s and B’s typically has a GPA between 3.0 and 3.8.
