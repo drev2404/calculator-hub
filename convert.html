@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Measurement Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Measurement Converter</h1>
+
+<div class="card">
+
+  <input id="value" placeholder="Enter value">
+
+  <select id="type">
+    <option value="km-miles">KM → Miles</option>
+    <option value="m-ft">Meters → Feet</option>
+    <option value="kg-lb">KG → Pounds</option>
+    <option value="c-f">Celsius → Fahrenheit</option>
+  </select>
+
+  <button onclick="convert()">Convert</button>
+
+  <p id="result"></p>
+
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function convert() {
+  let v = parseFloat(document.getElementById("value").value);
+  let type = document.getElementById("type").value;
+  let result = 0;
+
+  if (type === "km-miles") {
+    result = v * 0.621371;
+    document.getElementById("result").innerText = v + " km = " + result.toFixed(2) + " miles";
+  }
+
+  if (type === "m-ft") {
+    result = v * 3.28084;
+    document.getElementById("result").innerText = v + " meters = " + result.toFixed(2) + " feet";
+  }
+
+  if (type === "kg-lb") {
+    result = v * 2.20462;
+    document.getElementById("result").innerText = v + " kg = " + result.toFixed(2) + " lbs";
+  }
+
+  if (type === "c-f") {
+    result = (v * 9/5) + 32;
+    document.getElementById("result").innerText = v + "°C = " + result.toFixed(2) + "°F";
+  }
+}
+</script>
+
+</body>
+</html>
