@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>APR Calculator – Annual Percentage Rate</title>
+  <meta name="description" content="Calculate APR for loans and credit cards easily.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>APR Calculator</h1>
+
+<div class="card">
+  <input id="interest" placeholder="Interest Paid ($)">
+  <input id="fees" placeholder="Fees ($)">
+  <input id="loan" placeholder="Loan Amount">
+  <input id="term" placeholder="Loan Term (years)">
+  <button onclick="calcAPR()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How This APR Calculator Works</h2>
+  <p>APR shows the true yearly cost of borrowing including fees and interest.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>$100 interest + $20 fees on a $1000 loan gives a higher APR than interest alone.</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>What is APR?</b> Annual cost of borrowing including fees.</p>
+  <p><b>Why is it important?</b> It shows the real loan cost.</p>
+</div>
+
+<div class="card">
+  <a href="index.html">← Back Home</a> |
+  <a href="loan.html">Loan Calculator</a>
+</div>
+
+<script>
+function calcAPR() {
+  let interest = parseFloat(document.getElementById("interest").value);
+  let fees = parseFloat(document.getElementById("fees").value);
+  let loan = parseFloat(document.getElementById("loan").value);
+  let term = parseFloat(document.getElementById("term").value);
+
+  let apr = ((interest + fees) / loan) / term * 100;
+
+  document.getElementById("result").innerText =
+    "Estimated APR: " + apr.toFixed(2) + "%";
+}
+</script>
+
+</body>
+</html>
