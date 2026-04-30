@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Calculator</title>
+  <meta name="description" content="Add hours and minutes easily.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Time Calculator</h1>
+
+<div class="card">
+  <input id="hours" placeholder="Hours">
+  <input id="minutes" placeholder="Minutes">
+  <button onclick="calcTime()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<a href="index.html">← Back Home</a>
+
+<script>
+function calcTime() {
+  let h = parseFloat(document.getElementById("hours").value);
+  let m = parseFloat(document.getElementById("minutes").value);
+
+  let total = (h * 60) + m;
+
+  document.getElementById("result").innerText =
+    "Total Minutes: " + total;
+}
+</script>
+
+</body>
+</html>
