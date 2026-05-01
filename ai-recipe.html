@@ -11,12 +11,38 @@
 
 <p id="out"></p>
 
-<script>
-function test() {
-  alert("BUTTON WORKS");
-  document.getElementById("out").innerText = "JS IS RUNNING";
-}
-</script>
+<input id="ingredients" placeholder="chicken, rice, garlic">
 
-</body>
-</html>
+<button id="generateBtn">Generate Recipe</button>
+
+<pre id="result">Result will show here...</pre>
+
+<script>
+document.getElementById("generateBtn").addEventListener("click", async () => {
+  const resultEl = document.getElementById("result");
+  const ingredients = document.getElementById("ingredients").value;
+
+  resultEl.innerText = "Generating...";
+
+  try {
+    const res = await fetch("/api/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ingredients })
+    });
+
+    const data = await res.json();
+
+    console.log("API RESPONSE:", data);
+
+    resultEl.innerText =
+      data.recipe || data.message || JSON.stringify(data, null, 2);
+
+  } catch (err) {
+    console.error(err);
+    resultEl.innerText = "Error: " + err.message;
+  }
+});
+</script>
