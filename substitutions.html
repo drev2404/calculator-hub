@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ingredient Substitution Tool</title>
+  <meta name="description" content="Find ingredient substitutes for common cooking replacements.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Ingredient Substitution Tool</h1>
+
+<div class="card">
+  <input id="ingredient" placeholder="Enter ingredient (butter, milk, eggs)">
+
+  <button onclick="substitute()">Find Substitute</button>
+
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Type an ingredient and get a common substitute instantly.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>Butter → coconut oil<br>Milk → almond milk<br>Eggs → applesauce</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Are substitutes exact?</b> No, they are general cooking alternatives.</p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function substitute() {
+  let item = document.getElementById("ingredient").value.toLowerCase();
+
+  let result = "";
+
+  if (item === "butter") {
+    result = "Use coconut oil or margarine";
+  } else if (item === "milk") {
+    result = "Use almond, oat, or soy milk";
+  } else if (item === "eggs") {
+    result = "Use applesauce, flaxseed, or mashed banana";
+  } else if (item === "sugar") {
+    result = "Use honey, maple syrup, or stevia";
+  } else {
+    result = "No substitute found for this ingredient";
+  }
+
+  document.getElementById("result").innerText = result;
+}
+</script>
+
+</body>
+</html>
