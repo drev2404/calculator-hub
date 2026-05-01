@@ -1,27 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>AI Recipe Generator</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<h1>🤖 AI Recipe Generator</h1>
-
-<div class="card">
-  <input id="ingredients" placeholder="Enter ingredients (chicken, rice, eggs)">
-  <button onclick="generateRecipe()">Generate Recipe</button>
-
-  <p id="result"></p>
-</div>
-
-<a href="cooking-hub.html">← Back to Cooking Hub</a>
-<script>
 async function generateRecipe() {
-  let ingredients = document.getElementById("ingredients").value;
-
-  document.getElementById("result").innerText = "Loading...";
+  document.getElementById("result").innerText = "Testing...";
 
   try {
     let res = await fetch("/api/recipe", {
@@ -29,22 +7,16 @@ async function generateRecipe() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ ingredients })
+      body: JSON.stringify({ ingredients: "test" })
     });
 
-    console.log("STATUS:", res.status);
-
-    let text = await res.text(); // IMPORTANT DEBUG STEP
-    console.log("RAW RESPONSE:", text);
-
-    let data = JSON.parse(text);
+    let data = await res.json();
 
     document.getElementById("result").innerText =
-      data.recipe || data.error || text;
+      JSON.stringify(data, null, 2);
 
   } catch (err) {
-    console.log("ERROR:", err);
     document.getElementById("result").innerText =
-      "Connection error: " + err.message;
+      "FAILED: " + err.message;
   }
 }
