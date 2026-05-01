@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ingredient Substitution Tool</title>
-  <meta name="description" content="Find cooking ingredient substitutes instantly for common baking and cooking items.">
+  <title>Ingredient Substitution Tool – Smart Cooking Substitutes</title>
+  <meta name="description" content="Find ingredient substitutes instantly. Supports butter, milk, eggs, flour, sugar, and more with smart suggestions.">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .suggestions {
+      background: #fff;
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin: auto;
+      cursor: pointer;
+    }
+    .suggestions div {
+      padding: 8px;
+    }
+    .suggestions div:hover {
+      background: #eee;
+    }
+  </style>
 </head>
 
 <body>
@@ -11,62 +26,109 @@
 <h1>Ingredient Substitution Tool</h1>
 
 <div class="card">
-  <input id="ingredient" placeholder="Enter ingredient (butter, milk, eggs)">
+  <input id="ingredient" placeholder="Type ingredient (butter, milk, eggs)" onkeyup="showSuggestions()">
+  <div id="suggestions" class="suggestions"></div>
+
   <button onclick="substitute()">Find Substitute</button>
   <p id="result"></p>
-</div>
-
-<div class="card">
-  <h2>How to Use</h2>
-  <p>Type an ingredient like butter, milk, or eggs and click the button.</p>
-</div>
-
-<div class="card">
-  <h2>Example</h2>
-  <p>Butter → coconut oil<br>Milk → almond milk</p>
-</div>
-
-<div class="card">
-  <h2>FAQ</h2>
-  <p><b>Why didn't it work?</b> Try simple ingredient names like "butter" or "milk".</p>
 </div>
 
 <a href="index.html">← Back Home</a>
 
 <script>
-function substitute() {
+const map = {
+  butter: "Coconut oil, olive oil, margarine, applesauce (baking)",
+  milk: "Almond milk, oat milk, soy milk, coconut milk",
+  eggs: "Applesauce (1/4 cup), mashed banana, flax egg",
+  egg: "Applesauce (1/4 cup), mashed banana, flax egg",
+  sugar: "Honey, maple syrup, coconut sugar",
+  flour: "Almond flour, oat flour, gluten-free flour",
+  oil: "Butter, coconut oil",
+  sourcream: "Greek yogurt",
+  yogurt: "Sour cream",
+  buttermilk: "Milk + vinegar or lemon juice",
+  cornstarch: "Flour, arrowroot",
+  bakingpowder: "Baking soda + cream of tartar",
+  bakingsoda: "Baking powder (adjust amount)",
+  garlic: "Garlic powder (1/8 tsp per clove)",
+  onion: "Onion powder",
+  honey: "Maple syrup, agave",
+  maple: "Honey",
+  vinegar: "Lemon juice",
+  lemon: "Vinegar",
+  ketchup: "Tomato paste + vinegar + sugar",
+  mayo: "Greek yogurt, sour cream",
+  cream: "Milk + butter",
+  cheese: "Nutritional yeast (vegan)",
+  breadcrumbs: "Crushed crackers, oats",
+  rice: "Quinoa, cauliflower rice",
+  pasta: "Zucchini noodles, spaghetti squash",
+  soy: "Coconut aminos",
+  chocolate: "Cocoa powder + sugar + butter",
+  cocoa: "Melted chocolate",
+  wine: "Broth + vinegar",
+  beer: "Broth",
+  broth: "Water + seasoning",
+  salt: "Soy sauce (reduce amount)",
+  pepper: "Chili flakes",
+  cinnamon: "Nutmeg or allspice",
+  nutmeg: "Cinnamon",
+  cloves: "Allspice",
+  vanilla: "Maple syrup or almond extract"
+};
 
-  let item = document.getElementById("ingredient").value;
+function cleanInput(text) {
+  return text.toLowerCase().replace(/[^a-z]/g, "").trim();
+}
+
+function substitute() {
+  let raw = document.getElementById("ingredient").value;
+  let item = cleanInput(raw);
 
   if (!item) {
-    document.getElementById("result").innerText = "Please enter an ingredient";
+    document.getElementById("result").innerText = "Enter an ingredient";
     return;
   }
 
-  // clean input (THIS FIXES MOST BUGS)
-  item = item.toLowerCase().trim();
-
-  const map = {
-    "butter": "Coconut oil, olive oil, or margarine",
-    "milk": "Almond milk, oat milk, soy milk, or coconut milk",
-    "eggs": "Applesauce (1/4 cup per egg), mashed banana, or flax egg",
-    "egg": "Applesauce (1/4 cup per egg), mashed banana, or flax egg",
-    "sugar": "Honey, maple syrup, or coconut sugar",
-    "flour": "Almond flour, oat flour, or gluten-free flour",
-    "oil": "Butter or coconut oil",
-    "sour cream": "Greek yogurt",
-    "buttermilk": "Milk + 1 tbsp vinegar",
-    "cornstarch": "Flour or arrowroot powder"
-  };
-
   if (map[item]) {
     document.getElementById("result").innerText = map[item];
+    return;
+  }
+
+  // fuzzy suggestion
+  let closest = Object.keys(map).find(key => key.includes(item));
+
+  if (closest) {
+    document.getElementById("result").innerText =
+      "Did you mean '" + closest + "'?\n" + map[closest];
   } else {
     document.getElementById("result").innerText =
-      "No substitute found. Try: butter, milk, eggs, sugar, flour.";
+      "No match found. Try common ingredients like butter, milk, eggs.";
   }
+}
+
+function showSuggestions() {
+  let input = cleanInput(document.getElementById("ingredient").value);
+  let suggestionsBox = document.getElementById("suggestions");
+
+  suggestionsBox.innerHTML = "";
+
+  if (!input) return;
+
+  let matches = Object.keys(map).filter(key => key.includes(input)).slice(0, 5);
+
+  matches.forEach(match => {
+    let div = document.createElement("div");
+    div.innerText = match;
+    div.onclick = () => {
+      document.getElementById("ingredient").value = match;
+      suggestionsBox.innerHTML = "";
+    };
+    suggestionsBox.appendChild(div);
+  });
 }
 </script>
 
 </body>
 </html>
+  
