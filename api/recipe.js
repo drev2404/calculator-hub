@@ -6,16 +6,20 @@ module.exports = async function handler(req, res) {
 
     const { ingredients } = body || {};
 
+    console.log("Incoming:", ingredients);
+
     if (!ingredients) {
       return res.status(400).json({ error: "No ingredients provided" });
     }
 
-    res.status(200).json({
-      recipe: `Received ingredients: ${ingredients}`
+    return res.status(200).json({
+      recipe: `TEST WORKING → ${ingredients}`
     });
 
   } catch (error) {
-    res.status(500).json({
+    console.log("SERVER ERROR:", error);
+
+    return res.status(500).json({
       error: "Server error",
       details: error.message
     });
