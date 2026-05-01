@@ -41,19 +41,35 @@
   <p><b>Can athletes use this?</b><br>
   Yes, but athletes may naturally weigh more due to muscle mass.</p>
   </div>
-
 <script>
 function calcIBW() {
   let feet = parseFloat(document.getElementById("feet").value);
   let inches = parseFloat(document.getElementById("inches").value);
+  let gender = document.getElementById("gender").value;
 
-  let height = (feet * 12) + inches;
+  if (isNaN(feet) || isNaN(inches)) {
+    document.getElementById("result").innerText = "Enter valid height";
+    return;
+  }
 
-  let male = 50 + 2.3 * (height - 60);
-  let female = 45.5 + 2.3 * (height - 60);
+  let totalInches = (feet * 12) + inches;
 
-  document.getElementById("result").innerHTML =
-    "Male: " + male.toFixed(1) + " lbs<br>Female: " + female.toFixed(1) + " lbs";
+  if (totalInches < 60) {
+    document.getElementById("result").innerText =
+      "Formula is designed for heights over 5 feet";
+    return;
+  }
+
+  let ibw;
+
+  if (gender === "male") {
+    ibw = 50 + 2.3 * (totalInches - 60);
+  } else {
+    ibw = 45.5 + 2.3 * (totalInches - 60);
+  }
+
+  document.getElementById("result").innerText =
+    "Ideal Body Weight: " + ibw.toFixed(1) + " lbs";
 }
 </script>
 
