@@ -1,48 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>TEST AI</title>
-</head>
-<body>
-
-<h1>TEST PAGE</h1>
-
-<button onclick="test()">CLICK ME</button>
-
-<p id="out"></p>
-
 <input id="ingredients" placeholder="chicken, rice, garlic">
 
-<button id="generateBtn">Generate Recipe</button>
+<button id="btn">Generate</button>
 
-<pre id="result">Result will show here...</pre>
+<pre id="result">Waiting...</pre>
 
 <script>
-document.getElementById("generateBtn").addEventListener("click", async () => {
-  const resultEl = document.getElementById("result");
-  const ingredients = document.getElementById("ingredients").value;
-
-  resultEl.innerText = "Generating...";
+document.getElementById("btn").onclick = async function () {
+  const result = document.getElementById("result");
 
   try {
-    const res = await fetch("https://drev2404-calculator-hub.vercel.app//api/recipe", {
+    result.innerText = "STEP 1: Button clicked ✔";
+
+    const payload = {
+      ingredients: document.getElementById("ingredients").value || "test"
+    };
+
+    console.log("SENDING:", payload);
+
+    result.innerText += "\nSTEP 2: Sending request...";
+
+    const res = await fetch("/api/recipe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ ingredients })
+      body: JSON.stringify(payload)
     });
 
-    const data = await res.json();
+    result.innerText += "\nSTEP 3: Response received ✔";
 
-    console.log("API RESPONSE:", data);
+    const text = await res.text();
 
-    resultEl.innerText =
-      data.recipe || data.message || JSON.stringify(data, null, 2);
+    console.log("RAW RESPONSE:", text);
+
+    result.innerText =
+      "STATUS: " + res.status + "\n\n" + text;
 
   } catch (err) {
-    console.error(err);
-    resultEl.innerText = "Error: " + err.message;
+    console.log("ERROR:", err);
+    result.innerText =
+      "FAILED BEFORE RESPONSE:\n" + err.message;
   }
-});
+};
 </script>
