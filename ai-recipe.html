@@ -17,20 +17,35 @@
 </div>
 
 <a href="cooking-hub.html">← Back to Cooking Hub</a>
-
 <script>
 async function generateRecipe() {
   let ingredients = document.getElementById("ingredients").value;
 
-  let res = await fetch("https://YOUR-VERCEL-APP.vercel.app/api/recipe", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ ingredients })
-  });
+  if (!ingredients) {
+    document.getElementById("result").innerText = "Please enter ingredients";
+    return;
+  }
 
-  let data = await res.json();
+  document.getElementById("result").innerText = "Generating recipe...";
 
-  document.getElementById("result").innerText = data.recipe;
+  try {
+    let res = await fetch("https://YOUR-VERCEL-URL.vercel.app/api/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ingredients })
+    });
+
+    let data = await res.json();
+
+    document.getElementById("result").innerText =
+      data.recipe || data.error || "No response received";
+
+  } catch (err) {
+    document.getElementById("result").innerText =
+      "Error connecting to server";
+  }
 }
 </script>
 
