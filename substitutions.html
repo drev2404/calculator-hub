@@ -11,56 +11,59 @@
 <h1>Ingredient Substitution Tool</h1>
 
 <div class="card">
-  <input id="ingredient" placeholder="Enter ingredient (e.g. butter, milk, eggs)">
+  <input id="ingredient" placeholder="Enter ingredient (butter, milk, eggs)">
   <button onclick="substitute()">Find Substitute</button>
   <p id="result"></p>
 </div>
 
 <div class="card">
   <h2>How to Use</h2>
-  <p>Type an ingredient and click search to see common substitutes.</p>
+  <p>Type an ingredient like butter, milk, or eggs and click the button.</p>
 </div>
 
 <div class="card">
   <h2>Example</h2>
-  <p>Butter → coconut oil<br>Milk → almond milk<br>Eggs → applesauce</p>
+  <p>Butter → coconut oil<br>Milk → almond milk</p>
 </div>
 
 <div class="card">
   <h2>FAQ</h2>
-  <p><b>Are substitutes exact?</b> No, they are general cooking alternatives.</p>
+  <p><b>Why didn't it work?</b> Try simple ingredient names like "butter" or "milk".</p>
 </div>
 
 <a href="index.html">← Back Home</a>
 
 <script>
 function substitute() {
-  let item = document.getElementById("ingredient").value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z ]/g, "");
+
+  let item = document.getElementById("ingredient").value;
+
+  if (!item) {
+    document.getElementById("result").innerText = "Please enter an ingredient";
+    return;
+  }
+
+  // clean input (THIS FIXES MOST BUGS)
+  item = item.toLowerCase().trim();
 
   const map = {
-    butter: "Coconut oil, olive oil, or margarine",
-    milk: "Almond milk, oat milk, soy milk, or coconut milk",
-    eggs: "Applesauce (1/4 cup per egg), mashed banana, flax egg (1 tbsp flax + 3 tbsp water)",
-    sugar: "Honey, maple syrup, coconut sugar, or stevia",
-    flour: "Almond flour, oat flour, or gluten-free blend",
-    bakingpowder: "1/2 baking soda + 1/2 cream of tartar",
-    baking soda: "Use 3x baking powder",
-    oil: "Butter, avocado oil, or coconut oil",
-    sourcream: "Greek yogurt or mayonnaise",
-    buttermilk: "Milk + 1 tbsp vinegar or lemon juice",
-    cornstarch: "Flour or arrowroot powder",
-    honey: "Maple syrup or agave nectar",
-    chocolate: "Cocoa powder + sugar + butter"
+    "butter": "Coconut oil, olive oil, or margarine",
+    "milk": "Almond milk, oat milk, soy milk, or coconut milk",
+    "eggs": "Applesauce (1/4 cup per egg), mashed banana, or flax egg",
+    "egg": "Applesauce (1/4 cup per egg), mashed banana, or flax egg",
+    "sugar": "Honey, maple syrup, or coconut sugar",
+    "flour": "Almond flour, oat flour, or gluten-free flour",
+    "oil": "Butter or coconut oil",
+    "sour cream": "Greek yogurt",
+    "buttermilk": "Milk + 1 tbsp vinegar",
+    "cornstarch": "Flour or arrowroot powder"
   };
 
   if (map[item]) {
     document.getElementById("result").innerText = map[item];
   } else {
     document.getElementById("result").innerText =
-      "No substitute found — try common items like butter, milk, eggs, sugar.";
+      "No substitute found. Try: butter, milk, eggs, sugar, flour.";
   }
 }
 </script>
