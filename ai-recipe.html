@@ -29,14 +29,14 @@ async function generateRecipe() {
   document.getElementById("result").innerText = "Generating recipe...";
 
   try {
-    let res = await fetch("https://v0-cooking-j33ruzadd-rev2404-7986s-projects.vercel.app/api/recipe", {
+    let res = await fetch("https://drev2404-calculator-hub.vercel.app/api/recipe", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
   body: JSON.stringify({ ingredients })
-});
-    
+});, {
+  
 
     let data = await res.json();
 
