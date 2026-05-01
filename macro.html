@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Macro Calculator</title>
+  <meta name="description" content="Calculate protein, carbs, and fat based on calorie intake.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Macro Calculator</h1>
+
+<div class="card">
+  <input id="calories" placeholder="Daily Calories">
+
+  <button onclick="calcMacros()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<script>
+function calcMacros() {
+  let calories = parseFloat(document.getElementById("calories").value);
+
+  let protein = calories * 0.30 / 4;
+  let carbs = calories * 0.40 / 4;
+  let fat = calories * 0.30 / 9;
+
+  document.getElementById("result").innerHTML =
+    "Protein: " + protein.toFixed(0) + "g<br>" +
+    "Carbs: " + carbs.toFixed(0) + "g<br>" +
+    "Fat: " + fat.toFixed(0) + "g";
+}
+</script>
+
+</body>
+</html>
