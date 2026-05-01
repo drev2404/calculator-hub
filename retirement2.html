@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retirement Savings Calculator</title>
+  <meta name="description" content="Calculate future retirement savings based on contributions and interest.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Retirement Savings Calculator</h1>
+
+<div class="card">
+  <input id="start" placeholder="Starting Amount ($)">
+  <input id="monthly" placeholder="Monthly Contribution ($)">
+  <input id="years" placeholder="Years">
+
+  <button onclick="calcRetirement()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Enter starting savings, monthly deposits, and number of years.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>$5,000 + $300/month for 30 years ≈ $350,000+</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Does this include interest?</b> Yes, assumes ~7% growth.</p>
+</div>
+
+<script>
+function calcRetirement() {
+  let start = parseFloat(document.getElementById("start").value);
+  let monthly = parseFloat(document.getElementById("monthly").value);
+  let years = parseFloat(document.getElementById("years").value);
+
+  let rate = 0.07 / 12;
+  let months = years * 12;
+  let total = start;
+
+  for (let i = 0; i < months; i++) {
+    total = total * (1 + rate) + monthly;
+  }
+
+  document.getElementById("result").innerText =
+    "Future Value: $" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
