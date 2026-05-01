@@ -1,45 +1,25 @@
-<input id="ingredients" placeholder="chicken, rice, garlic">
+const res = await fetch("/api/recipe", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    ingredients: document.getElementById("ingredients").value
+  })
+});
 
-<button id="btn">Generate</button>
+const text = await res.text(); // IMPORTANT
 
-<pre id="result">Waiting...</pre>
+console.log(text);
 
-<script>
-document.getElementById("btn").onclick = async function () {
-  const result = document.getElementById("result");
+let data;
+try {
+  data = JSON.parse(text);
+} catch (e) {
+  document.getElementById("result").innerText =
+    "SERVER RETURNED NON-JSON:\n\n" + text;
+  return;
+}
 
-  try {
-    result.innerText = "STEP 1: Button clicked ✔";
-
-    const payload = {
-      ingredients: document.getElementById("ingredients").value || "test"
-    };
-
-    console.log("SENDING:", payload);
-
-    result.innerText += "\nSTEP 2: Sending request...";
-
-    const res = await fetch("/api/recipe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    result.innerText += "\nSTEP 3: Response received ✔";
-
-    const text = await res.text();
-
-    console.log("RAW RESPONSE:", text);
-
-    result.innerText =
-      "STATUS: " + res.status + "\n\n" + text;
-
-  } catch (err) {
-    console.log("ERROR:", err);
-    result.innerText =
-      "FAILED BEFORE RESPONSE:\n" + err.message;
-  }
-};
-</script>
+document.getElementById("result").innerText =
+  data.recipe || data.error || text;
