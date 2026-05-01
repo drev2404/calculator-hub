@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cooking Time Converter</title>
+  <meta name="description" content="Adjust cooking times for frozen, thawed, or recipe scaling adjustments.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Cooking Time Converter</h1>
+
+<div class="card">
+  <input id="time" placeholder="Original Time (minutes)">
+  <input id="factor" placeholder="Multiplier (e.g. 1.5, 2, 0.75)">
+
+  <button onclick="calcCookTime()">Convert</button>
+
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Enter original cooking time and adjustment factor.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>30 min × 1.5 = 45 min<br>60 min × 0.75 = 45 min</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>When do I use this?</b> When scaling recipes or adjusting frozen food cook times.</p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function calcCookTime() {
+  let time = parseFloat(document.getElementById("time").value);
+  let factor = parseFloat(document.getElementById("factor").value);
+
+  if (!time || !factor) {
+    document.getElementById("result").innerText = "Enter valid values";
+    return;
+  }
+
+  let result = time * factor;
+
+  document.getElementById("result").innerText =
+    "Adjusted Time: " + result.toFixed(0) + " minutes";
+}
+</script>
+
+</body>
+</html>
