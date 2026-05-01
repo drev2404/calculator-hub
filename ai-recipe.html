@@ -29,8 +29,8 @@ async function generateRecipe() {
   document.getElementById("result").innerText = "Generating recipe...";
 
   try {
-    let res = await fetch("https://YOUR-VERCEL-URL.vercel.app/api/recipe", {
-      method: "POST",
+    let res = await fetch("https://vercel.com/rev2404-7986s-projects/v0-cooking-app/settings/environment-variables", {
+      method: "POST"
       headers: {
         "Content-Type": "application/json"
       },
