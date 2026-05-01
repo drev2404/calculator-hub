@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Refinance Savings Calculator</title>
+  <meta name="description" content="Calculate how much money you can save by refinancing your loan or mortgage.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Refinance Savings Calculator</h1>
+
+<div class="card">
+  <input id="currentPayment" placeholder="Current Monthly Payment ($)">
+  <input id="newPayment" placeholder="New Monthly Payment ($)">
+  <input id="months" placeholder="Months Remaining">
+
+  <button onclick="calcRefi()">Calculate Savings</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Enter your current payment, new payment, and remaining months on your loan.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>$1,500 current vs $1,200 new for 60 months = $18,000 saved</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Does refinancing always save money?</b> Not always — depends on rates and fees.</p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function calcRefi() {
+  let current = parseFloat(document.getElementById("currentPayment").value);
+  let newPay = parseFloat(document.getElementById("newPayment").value);
+  let months = parseFloat(document.getElementById("months").value);
+
+  if (!current || !newPay || !months) {
+    document.getElementById("result").innerText = "Enter all values";
+    return;
+  }
+
+  let savings = (current - newPay) * months;
+
+  document.getElementById("result").innerText =
+    "Total Savings: $" + savings.toFixed(2);
+}
+</script>
+
+</body>
+</html>
