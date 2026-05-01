@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Recipe Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>🤖 AI Recipe Generator</h1>
+
+<div class="card">
+  <input id="ingredients" placeholder="Enter ingredients (chicken, rice, eggs)">
+  <button onclick="generateRecipe()">Generate Recipe</button>
+
+  <p id="result"></p>
+</div>
+
+<a href="cooking-hub.html">← Back to Cooking Hub</a>
+
+<script>
+async function generateRecipe() {
+  let ingredients = document.getElementById("ingredients").value;
+
+  let res = await fetch("https://YOUR-VERCEL-APP.vercel.app/api/recipe", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ ingredients })
+  });
+
+  let data = await res.json();
+
+  document.getElementById("result").innerText = data.recipe;
+}
+</script>
+
+</body>
+</html>
