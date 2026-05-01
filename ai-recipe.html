@@ -21,32 +21,30 @@
 async function generateRecipe() {
   let ingredients = document.getElementById("ingredients").value;
 
-  if (!ingredients) {
-    document.getElementById("result").innerText = "Please enter ingredients";
-    return;
-  }
-
-  document.getElementById("result").innerText = "Generating recipe...";
+  document.getElementById("result").innerText = "Loading...";
 
   try {
     let res = await fetch("/api/recipe", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    ingredients: ingredients
-  })
-});
-    let data = await res.json();
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ingredients })
+    });
+
+    console.log("STATUS:", res.status);
+
+    let text = await res.text(); // IMPORTANT DEBUG STEP
+    console.log("RAW RESPONSE:", text);
+
+    let data = JSON.parse(text);
 
     document.getElementById("result").innerText =
-      data.recipe || data.error || "No response received";
+      data.recipe || data.error || text;
 
   } catch (err) {
+    console.log("ERROR:", err);
     document.getElementById("result").innerText =
-      "Error connecting to server";
+      "Connection error: " + err.message;
   }
-</script>
-</body>
-</html>
+}
