@@ -1,9 +1,14 @@
 export default async function handler(req, res) {
   try {
+    console.log("Request body:", req.body);
+
     const { ingredients } = req.body;
 
     if (!ingredients) {
-      return res.status(400).json({ error: "No ingredients provided" });
+      return res.status(400).json({
+        error: "No ingredients received",
+        body: req.body
+      });
     }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -17,42 +22,33 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "user",
-            content: `
-You are a cooking assistant.
-
-Create a simple recipe using:
-${ingredients}
-
-Assume salt, pepper, oil, and basic spices are available.
-
-Return:
-- Recipe name
-- Ingredients list
-- Step-by-step instructions
-            `
+            content: `Create a recipe using: ${ingredients}`
           }
-        ],
-        temperature: 0.7
+        ]
       })
     });
 
     const data = await response.json();
 
-    const output = data?.choices?.[0]?.message?.content;
+    console.log("OpenAI response:", data);
 
-    if (!output) {
+    if (!data.choices || !data.choices[0]) {
       return res.status(500).json({
-        error: "No response from AI",
+        error: "OpenAI failed",
         raw: data
       });
     }
 
-    res.status(200).json({ recipe: output });
+    res.status(200).json({
+      recipe: data.choices[0].message.content
+    });
 
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
+
     res.status(500).json({
       error: "Server error",
-      details: error.message
+      message: err.message
     });
   }
 }
