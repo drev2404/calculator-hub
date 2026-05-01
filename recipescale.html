@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Recipe Scaling Calculator</title>
-  <meta name="description" content="Scale recipes up or down instantly. Convert ingredient amounts for any serving size.">
+  <meta name="description" content="Scale recipe ingredients up or down with cups, tablespoons, grams, and more.">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,8 +11,18 @@
 <h1>Recipe Scaling Calculator</h1>
 
 <div class="card">
-  <input id="amount" placeholder="Original Amount">
-  <input id="scale" placeholder="Scale Factor (e.g. 2, 0.5, 3)">
+  <input id="amount" placeholder="Amount (e.g. 1, 2, 0.5)">
+
+  <select id="unit">
+    <option value="cups">Cups</option>
+    <option value="tbsp">Tablespoons</option>
+    <option value="tsp">Teaspoons</option>
+    <option value="oz">Ounces</option>
+    <option value="grams">Grams</option>
+    <option value="liters">Liters</option>
+  </select>
+
+  <input id="scale" placeholder="Scale factor (e.g. 2, 0.5, 3)">
 
   <button onclick="scaleRecipe()">Calculate</button>
 
@@ -21,35 +31,36 @@
 
 <div class="card">
   <h2>How to Use</h2>
-  <p>Enter the original ingredient amount and how much you want to scale the recipe.</p>
+  <p>Enter ingredient amount, unit, and scale factor (2 = double recipe).</p>
 </div>
 
 <div class="card">
   <h2>Example</h2>
-  <p>1 cup × 2 = 2 cups<br>1/2 cup × 3 = 1.5 cups</p>
+  <p>1 cup × 2 = 2 cups<br>500g × 0.5 = 250g</p>
 </div>
 
 <div class="card">
   <h2>FAQ</h2>
-  <p><b>Can I scale down recipes?</b> Yes, use values like 0.5 or 0.25.</p>
+  <p><b>Can I scale down recipes?</b> Yes — use values like 0.5 or 0.25.</p>
 </div>
 
-<a href="index.html">← Back</a>
+<a href="index.html">← Back Home</a>
 
 <script>
 function scaleRecipe() {
   let amount = parseFloat(document.getElementById("amount").value);
   let scale = parseFloat(document.getElementById("scale").value);
+  let unit = document.getElementById("unit").value;
 
-  if (!amount || !scale) {
-    document.getElementById("result").innerText = "Enter valid values";
+  if (isNaN(amount) || isNaN(scale)) {
+    document.getElementById("result").innerText = "Enter valid numbers";
     return;
   }
 
   let result = amount * scale;
 
   document.getElementById("result").innerText =
-    "New Amount: " + result.toFixed(2);
+    "New Amount: " + result.toFixed(2) + " " + unit;
 }
 </script>
 
