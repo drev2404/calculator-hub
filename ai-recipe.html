@@ -29,15 +29,15 @@ async function generateRecipe() {
   document.getElementById("result").innerText = "Generating recipe...";
 
   try {
-    let res = await fetch("https://drev2404-calculator-hub.vercel.app/api/recipe", {
+    let res = await fetch("/api/recipe", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
-  body: JSON.stringify({ ingredients })
-});, {
-  
-
+  body: JSON.stringify({
+    ingredients: ingredients
+  })
+});
     let data = await res.json();
 
     document.getElementById("result").innerText =
@@ -47,7 +47,6 @@ async function generateRecipe() {
     document.getElementById("result").innerText =
       "Error connecting to server";
   }
-}
 </script>
 </body>
 </html>
