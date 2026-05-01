@@ -2,22 +2,16 @@
 <html>
 <head>
   <title>GPA Calculator – Calculate Your Grade Point Average</title>
-<meta name="description" content="Calculate your GPA quickly with this easy-to-use GPA calculator. Perfect for students tracking their grades.">
+  <meta name="description" content="Free GPA calculator for students. Enter your grades (A–F) and instantly calculate your GPA.">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1>GPA Calculator</h1>
 
-< 
 <div class="card">
-  <h2>How GPA Is Calculated</h2>
-  <p>
-    Enter your grades to calculate your average GPA.
-    This helps students track academic performance and set goals.
-  </p>
-</div>
-  <div class="card">
+  <h2>Enter Your Grades</h2>
 
   <input id="grade1" placeholder="Grade (A, B, C, D, F)">
   <input id="grade2" placeholder="Grade (optional)">
@@ -27,66 +21,87 @@
   <button onclick="calcGPA()">Calculate GPA</button>
 
   <p id="gpaResult"></p>
+</div>
 
-  </div>
-  <div class="card">
-  <h2>How to Use This GPA Calculator</h2>
+<!-- HOW TO USE -->
+<div class="card">
+  <h2>How to Use This Calculator</h2>
   <p>
-    Enter your letter grades (A, B, C, D, or F) into the boxes.
-    You do not need credits for this version.
-    Click "Calculate GPA" and your result will appear instantly.
+    Enter your letter grades (A, B, C, D, or F) into the boxes above.
+    You can leave extra boxes blank.
+    Click “Calculate GPA” to get your result instantly.
   </p>
-  </div>
+</div>
+
+<!-- EXAMPLE -->
+<div class="card">
   <h2>Example</h2>
   <p>
-    A student with mostly A’s and B’s typically has a GPA between 3.0 and 3.8.
+    If you enter: A, B, B, C<br>
+    The calculator converts them into points:<br>
+    A = 4.0, B = 3.0, C = 2.0<br><br>
+    Result: GPA = 3.00
   </p>
-  </div>
-  <div class="card">
+</div>
+
+<!-- FAQ -->
+<div class="card">
   <h2>Frequently Asked Questions</h2>
 
-  <p><b>What is a good GPA?</b><br>
-  3.0 or higher is generally considered strong.</p>
+  <p><b>Do I need credits?</b><br>
+  No, this is a simple GPA calculator.</p>
 
-  <p><b>Is GPA weighted?</b><br>
-  Some schools use weighted scales.</p>
-  </div>
+  <p><b>Is this accurate?</b><br>
+  Yes for standard unweighted GPA systems.</p>
+
+  <p><b>Can I use plus/minus grades?</b><br>
+  Not in this version (A+, B- not included).</p>
+</div>
+
 <a href="index.html">← Back Home</a>
 
 <script>
+function gradeToPoint(letter) {
+  if (!letter) return null;
+
+  letter = letter.toUpperCase().trim();
+
+  if (letter === "A") return 4.0;
+  if (letter === "B") return 3.0;
+  if (letter === "C") return 2.0;
+  if (letter === "D") return 1.0;
+  if (letter === "F") return 0.0;
+
+  return null;
+}
+
 function calcGPA() {
 
-  let g1 = parseFloat(document.getElementById("grade1").value);
-  let c1 = parseFloat(document.getElementById("credit1").value);
+  let grades = [
+    gradeToPoint(document.getElementById("grade1").value),
+    gradeToPoint(document.getElementById("grade2").value),
+    gradeToPoint(document.getElementById("grade3").value),
+    gradeToPoint(document.getElementById("grade4").value)
+  ];
 
-  let g2 = parseFloat(document.getElementById("grade2").value);
-  let c2 = parseFloat(document.getElementById("credit2").value);
+  grades = grades.filter(g => g !== null);
 
-  let g3 = parseFloat(document.getElementById("grade3").value);
-  let c3 = parseFloat(document.getElementById("credit3").value);
-
-  // default missing values to 0 (prevents NaN)
-  g1 = g1 || 0; c1 = c1 || 0;
-  g2 = g2 || 0; c2 = c2 || 0;
-  g3 = g3 || 0; c3 = c3 || 0;
-
-  let totalPoints =
-    (g1 * c1) +
-    (g2 * c2) +
-    (g3 * c3);
-
-  let totalCredits = c1 + c2 + c3;
-
-  if (totalCredits === 0) {
+  if (grades.length === 0) {
     document.getElementById("gpaResult").innerText =
-      "Enter at least one class";
+      "Please enter at least one valid grade (A, B, C, D, F)";
     return;
   }
 
-  let gpa = totalPoints / totalCredits;
+  let total = 0;
+
+  for (let i = 0; i < grades.length; i++) {
+    total += grades[i];
+  }
+
+  let gpa = total / grades.length;
 
   document.getElementById("gpaResult").innerText =
-    "GPA: " + gpa.toFixed(2);
+    "Your GPA: " + gpa.toFixed(2);
 }
 </script>
 
