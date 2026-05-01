@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Credit Card Payoff Calculator</title>
+  <meta name="description" content="Calculate how long it takes to pay off your credit card debt.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Credit Card Payoff Calculator</h1>
+
+<div class="card">
+  <input id="balance" placeholder="Balance ($)">
+  <input id="payment" placeholder="Monthly Payment ($)">
+  <input id="apr" placeholder="APR (%)">
+
+  <button onclick="calcCC()">Calculate Payoff</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Enter balance, payment, and APR to estimate payoff time.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>$5,000 balance, $200 payment, 18% APR = ~32 months payoff</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Does higher payment help?</b> Yes, it reduces interest and time.</p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function calcCC() {
+  let balance = parseFloat(document.getElementById("balance").value);
+  let payment = parseFloat(document.getElementById("payment").value);
+  let apr = parseFloat(document.getElementById("apr").value) / 100 / 12;
+
+  if (!balance || !payment || !apr) {
+    document.getElementById("result").innerText = "Enter all values";
+    return;
+  }
+
+  let months = 0;
+
+  while (balance > 0 && months < 600) {
+    balance = balance + (balance * apr) - payment;
+    months++;
+  }
+
+  document.getElementById("result").innerText =
+    "Payoff Time: " + months + " months";
+}
+</script>
+
+</body>
+</html>
