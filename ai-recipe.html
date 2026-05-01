@@ -1,93 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>AI Recipe Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f6f6f6;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-    }
-
-    button {
-      padding: 10px 15px;
-      cursor: pointer;
-      background: #2c7be5;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-
-    pre {
-      text-align: left;
-      white-space: pre-wrap;
-      background: #eee;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 5px;
-    }
-  </style>
+  <title>TEST AI</title>
 </head>
-
 <body>
 
-  <h1>🤖 AI Recipe Generator</h1>
+<h1>TEST PAGE</h1>
 
-  <div class="card">
-    <input id="ingredients" placeholder="Enter ingredients (e.g. chicken, rice, garlic)">
-    <button onclick="generateRecipe()">Generate Recipe</button>
+<button onclick="test()">CLICK ME</button>
 
-    <pre id="result">Your recipe will appear here...</pre>
-  </div>
+<p id="out"></p>
 
-  <script>
-    async function generateRecipe() {
-      const resultEl = document.getElementById("result");
-      const ingredients = document.getElementById("ingredients").value;
-
-      resultEl.innerText = "Generating recipe...";
-
-      try {
-        const res = await fetch("/api/recipe", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ ingredients })
-        });
-
-        const data = await res.json();
-
-        console.log("API RESPONSE:", data);
-
-        resultEl.innerText =
-          data.recipe || data.error || JSON.stringify(data, null, 2);
-
-      } catch (error) {
-        console.error(error);
-        resultEl.innerText = "Error connecting to server: " + error.message;
-      }
-    }
-  </script>
+<script>
+function test() {
+  alert("BUTTON WORKS");
+  document.getElementById("out").innerText = "JS IS RUNNING";
+}
+</script>
 
 </body>
 </html>
