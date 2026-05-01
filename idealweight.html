@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ideal Body Weight Calculator</title>
+  <meta name="description" content="Calculate ideal body weight based on height and gender.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Ideal Body Weight Calculator</h1>
+
+<div class="card">
+  <input id="feet" placeholder="Feet">
+  <input id="inches" placeholder="Inches">
+
+  <button onclick="calcIBW()">Calculate</button>
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Enter your height in feet and inches.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>5'10" male ≈ 166 lbs ideal weight</p>
+</div>
+
+<script>
+function calcIBW() {
+  let feet = parseFloat(document.getElementById("feet").value);
+  let inches = parseFloat(document.getElementById("inches").value);
+
+  let height = (feet * 12) + inches;
+
+  let male = 50 + 2.3 * (height - 60);
+  let female = 45.5 + 2.3 * (height - 60);
+
+  document.getElementById("result").innerHTML =
+    "Male: " + male.toFixed(1) + " lbs<br>Female: " + female.toFixed(1) + " lbs";
+}
+</script>
+
+</body>
+</html>
