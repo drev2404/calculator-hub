@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe Scaling Calculator</title>
+  <meta name="description" content="Scale recipes up or down instantly. Convert ingredient amounts for any serving size.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Recipe Scaling Calculator</h1>
+
+<div class="card">
+  <input id="amount" placeholder="Original Amount">
+  <input id="scale" placeholder="Scale Factor (e.g. 2, 0.5, 3)">
+
+  <button onclick="scaleRecipe()">Calculate</button>
+
+  <p id="result"></p>
+</div>
+
+<div class="card">
+  <h2>How to Use</h2>
+  <p>Enter the original ingredient amount and how much you want to scale the recipe.</p>
+</div>
+
+<div class="card">
+  <h2>Example</h2>
+  <p>1 cup × 2 = 2 cups<br>1/2 cup × 3 = 1.5 cups</p>
+</div>
+
+<div class="card">
+  <h2>FAQ</h2>
+  <p><b>Can I scale down recipes?</b> Yes, use values like 0.5 or 0.25.</p>
+</div>
+
+<a href="index.html">← Back</a>
+
+<script>
+function scaleRecipe() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  let scale = parseFloat(document.getElementById("scale").value);
+
+  if (!amount || !scale) {
+    document.getElementById("result").innerText = "Enter valid values";
+    return;
+  }
+
+  let result = amount * scale;
+
+  document.getElementById("result").innerText =
+    "New Amount: " + result.toFixed(2);
+}
+</script>
+
+</body>
+</html>
