@@ -1,56 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Home -->
   <url>
     <loc>https://drev2404.github.io/Calculator-hub/</loc>
   </url>
 
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/loan.html</loc>
-  </url>
+  <!-- Finance -->
+  <url><loc>https://drev2404.github.io/Calculator-hub/loan.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/mortgage.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/apr.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/interest.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/refi.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/creditcard.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/retirement2.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/loan-payoff.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/debt-snowball.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/investment.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/tax.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/savings.html</loc></url>
 
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/mortgage.html</loc>
-  </url>
+  <!-- Health -->
+  <url><loc>https://drev2404.github.io/Calculator-hub/bmi.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/bodyfat.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/calories.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/idealweight.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/macro.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/water.html</loc></url>
 
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/refi.html</loc>
-  </url>
+  <!-- Cooking -->
+  <url><loc>https://drev2404.github.io/Calculator-hub/cooking.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/recipescale.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/cooktime.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/substitutions.html</loc></url>
 
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/creditcard.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/retirement2.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/bmi.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/bodyfat.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/calories.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/recipescale.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/cooktime.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/substitutions.html</loc>
-  </url>
-
-  <url>
-    <loc>https://drev2404.github.io/Calculator-hub/cooking.html</loc>
-  </url>
+  <!-- Utility -->
+  <url><loc>https://drev2404.github.io/Calculator-hub/percentage.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/age.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/date.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/time.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/gpa.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/convert.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/timezone.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/tip.html</loc></url>
+  <url><loc>https://drev2404.github.io/Calculator-hub/salary.html</loc></url>
 
 </urlset>
