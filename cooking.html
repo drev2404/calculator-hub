@@ -1,92 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cooking Conversion Calculator – Cups, Grams, Ounces & More</title>
-<meta name="description" content="Convert cooking measurements like cups to grams, ounces, and more with this free kitchen conversion calculator.">
+  <title>Cooking Measurement Converter</title>
+  <meta name="description" content="Convert cooking measurements like cups, tablespoons, teaspoons, ounces, grams, milliliters, liters, and gallons instantly.">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>Cooking Conversion Calculator</h1>
+<h1>Cooking Measurement Converter</h1>
 
 <div class="card">
 
-  <input id="amount" placeholder="Enter amount">
+  <input id="value" placeholder="Enter amount">
 
   <select id="fromUnit">
-    <option value="cup">Cups</option>
-    <option value="tbsp">Tablespoons</option>
-    <option value="tsp">Teaspoons</option>
-    <option value="ml">Milliliters</option>
+    <option value="tsp">Teaspoon (tsp)</option>
+    <option value="tbsp">Tablespoon (tbsp)</option>
+    <option value="cup">Cup</option>
+    <option value="oz">Fluid Ounce (fl oz)</option>
+    <option value="ml">Milliliter (ml)</option>
+    <option value="l">Liter (L)</option>
+    <option value="gal">Gallon</option>
+    <option value="g">Gram (g)</option>
   </select>
+
+  <span>to</span>
 
   <select id="toUnit">
-    <option value="cup">Cups</option>
-    <option value="tbsp">Tablespoons</option>
-    <option value="tsp">Teaspoons</option>
-    <option value="ml">Milliliters</option>
+    <option value="tsp">Teaspoon (tsp)</option>
+    <option value="tbsp">Tablespoon (tbsp)</option>
+    <option value="cup">Cup</option>
+    <option value="oz">Fluid Ounce (fl oz)</option>
+    <option value="ml">Milliliter (ml)</option>
+    <option value="l">Liter (L)</option>
+    <option value="gal">Gallon</option>
+    <option value="g">Gram (g)</option>
   </select>
 
-  <button onclick="convertCooking()">Convert</button>
+  <button onclick="convert()">Convert</button>
 
   <p id="result"></p>
 
 </div>
 
-</div>
+<!-- HOW IT WORKS -->
 <div class="card">
-  <h2>Cooking Measurement Conversions</h2>
+  <h2>How It Works</h2>
   <p>
-    Easily convert cooking measurements like cups, grams, ounces, and teaspoons.
-    This is helpful when following recipes or adjusting ingredient amounts.
+    This calculator converts common cooking measurements used in recipes.
+    It includes both US and metric kitchen units.
   </p>
 </div>
-  <div class="card">
+
+<!-- EXAMPLE -->
+<div class="card">
   <h2>Example</h2>
   <p>
-    1 cup equals 16 tablespoons or about 240 ml,
-    useful when scaling recipes up or down.
+    1 cup = 16 tablespoons = 48 teaspoons<br>
+    1 liter ≈ 4.23 cups<br>
+    1 gallon = 3.78 liters
   </p>
-  </div>
-  <div class="card">
-  <h2>Frequently Asked Questions</h2>
+</div>
 
-  <p><b>Why use this?</b><br>
-  To convert cooking measurements accurately.</p>
+<!-- FAQ -->
+<div class="card">
+  <h2>FAQ</h2>
 
-  <p><b>Does it include grams?</b><br>
-  Some versions include weight conversions.</p>
-  </div>
+  <p><b>Is this exact for cooking?</b><br>
+  Yes for standard kitchen conversions.</p>
+
+  <p><b>Does this work for dry and liquid ingredients?</b><br>
+  Liquid conversions are exact. Dry (grams) depends on ingredient density.</p>
+</div>
+
 <a href="index.html">← Back Home</a>
 
 <script>
-function convertCooking() {
-  let amount = parseFloat(document.getElementById("amount").value);
+function toBase(value, unit) {
+  // Convert everything to milliliters as base (except grams simplified)
+  switch(unit) {
+    case "tsp": return value * 4.92892;
+    case "tbsp": return value * 14.7868;
+    case "cup": return value * 236.588;
+    case "oz": return value * 29.5735;
+    case "ml": return value;
+    case "l": return value * 1000;
+    case "gal": return value * 3785.41;
+    case "g": return value; // simplified (not liquid conversion)
+  }
+}
+
+function fromBase(value, unit) {
+  switch(unit) {
+    case "tsp": return value / 4.92892;
+    case "tbsp": return value / 14.7868;
+    case "cup": return value / 236.588;
+    case "oz": return value / 29.5735;
+    case "ml": return value;
+    case "l": return value / 1000;
+    case "gal": return value / 3785.41;
+    case "g": return value; // simplified
+  }
+}
+
+function convert() {
+  let value = parseFloat(document.getElementById("value").value);
   let from = document.getElementById("fromUnit").value;
   let to = document.getElementById("toUnit").value;
 
-  if (!amount) {
-    document.getElementById("result").innerText = "Enter an amount";
+  if (!value) {
+    document.getElementById("result").innerText = "Enter a value";
     return;
   }
 
-  // Convert everything to ml first
-  let ml;
-
-  if (from === "cup") ml = amount * 240;
-  else if (from === "tbsp") ml = amount * 15;
-  else if (from === "tsp") ml = amount * 5;
-  else if (from === "ml") ml = amount;
-
-  let result;
-
-  if (to === "cup") result = ml / 240;
-  else if (to === "tbsp") result = ml / 15;
-  else if (to === "tsp") result = ml / 5;
-  else if (to === "ml") result = ml;
+  let base = toBase(value, from);
+  let result = fromBase(base, to);
 
   document.getElementById("result").innerText =
-    "Converted: " + result.toFixed(2) + " " + to;
+    value + " " + from + " = " + result.toFixed(2) + " " + to;
 }
 </script>
 
