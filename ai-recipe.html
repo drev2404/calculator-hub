@@ -1,25 +1,26 @@
-const res = await fetch("/api/recipe", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    ingredients: document.getElementById("ingredients").value
-  })
-});
+<script>
+async function generateRecipe() {
+  const ingredients = document.getElementById("ingredients").value;
+  const result = document.getElementById("result");
 
-const text = await res.text(); // IMPORTANT
+  result.innerText = "Generating recipe...";
 
-console.log(text);
+  try {
+    const res = await fetch("/api/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ingredients })
+    });
 
-let data;
-try {
-  data = JSON.parse(text);
-} catch (e) {
-  document.getElementById("result").innerText =
-    "SERVER RETURNED NON-JSON:\n\n" + text;
-  return;
+    const data = await res.json();
+
+    result.innerText =
+      data.recipe || data.error || "Something went wrong";
+
+  } catch (err) {
+    result.innerText = err.message;
+  }
 }
-
-document.getElementById("result").innerText =
-  data.recipe || data.error || text;
+</script>
