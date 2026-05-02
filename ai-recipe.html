@@ -1,9 +1,17 @@
+<h1>AI Recipe Generator</h1>
+
+<input id="ingredients" placeholder="chicken, rice, garlic">
+
+<button onclick="generateRecipe()">Generate Recipe</button>
+
+<pre id="result">Your recipe will appear here...</pre>
+
 <script>
 async function generateRecipe() {
   const ingredients = document.getElementById("ingredients").value;
   const result = document.getElementById("result");
 
-  result.innerText = "Generating recipe...";
+  result.innerText = "Generating...";
 
   try {
     const res = await fetch("/api/recipe", {
@@ -17,10 +25,10 @@ async function generateRecipe() {
     const data = await res.json();
 
     result.innerText =
-      data.recipe || data.error || "Something went wrong";
+      data.recipe || data.error || JSON.stringify(data);
 
   } catch (err) {
-    result.innerText = err.message;
+    result.innerText = "Error: " + err.message;
   }
 }
 </script>
